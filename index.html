@@ -33,10 +33,10 @@
                 const ipResponse = await fetch('https://ipinfo.io/200.32.254.216/json?token=875ca9557630a5');
                 const ipData = await ipResponse.json();
                 const userIP = ipData.ip;
-                outputDiv.innerHTML += `<p><strong>IP Address:</strong> ${userIP}</p>`;
+                outputDiv.innerHTML += `<p><strong>IP Address:</strong> 200.32.254.216</p>`;
 
                 // 2. Get location based on IP
-                const locationResponse = await fetch(`https://ipinfo.io/${userIP}/json?token=YOUR_IPINFO_API_TOKEN`);
+                const locationResponse = await fetch(`https://ipinfo.io/200.32.254.216/json?token=YOUR_IPINFO_API_TOKEN`);
                 const locationData = await locationResponse.json();
                 const userLocation = locationData.city + ', ' + locationData.region;
                 outputDiv.innerHTML += `<p><strong>Location:</strong> ${userLocation}</p>`;
