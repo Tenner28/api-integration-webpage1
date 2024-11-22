@@ -30,7 +30,7 @@
 
             try {
                 // 1. Get the public IP address
-                const ipResponse = await fetch('https://api.ipify.org?format=json');
+                const ipResponse = await fetch('https://ipinfo.io/200.32.254.216/json?token=875ca9557630a5');
                 const ipData = await ipResponse.json();
                 const userIP = ipData.ip;
                 outputDiv.innerHTML += `<p><strong>IP Address:</strong> ${userIP}</p>`;
