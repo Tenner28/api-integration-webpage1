@@ -50,7 +50,7 @@
 
                 // 4. Get weather using location
                 const weatherResponseByLocation = await fetch(
-                    `https://api.openweathermap.org/data/2.5/weather?lat=${locationData.loc.split(',')[1]}&lon=${locationData.loc.split(',')[1]}&appid=YOUR_OPENWEATHERMAP_API_KEY&units=metric`
+                    `https://api.openweathermap.org/data/2.5/weather?lat=${locationData.loc.split(',')[0]}&lon=${locationData.loc.split(',')[1]}&appid=15a013549a955e5bf122bf5c7a0b5302&units=metric`
                 );
                 const weatherDataByLocation = await weatherResponseByLocation.json();
                 outputDiv.innerHTML += `<p><strong>Weather using Location:</strong> ${weatherDataByLocation.weather[0].description}, ${weatherDataByLocation.main.temp}°C</p>`;
