@@ -43,7 +43,7 @@
 
                 // 3. Get weather using IP (fallback weather API)
                 const weatherResponseByIP = await fetch(
-                    `https://api.openweathermap.org/data/2.5/weather?q=${locationData.city}&appid=d604ab603cbcc8bb2444c5df1f344f10=metric`
+                    `https://api.openweathermap.org/data/2.5/weather?q=${locationData.city}&appid=37e724a7fbf0d5a7b43791c6efd3afe9=metric`
                 );
                 const weatherDataByIP = await weatherResponseByIP.json();
                 outputDiv.innerHTML += `<p><strong>Weather using IP:</strong> ${weatherDataByIP.weather[0].description}, ${weatherDataByIP.main.temp}°C</p>`;
