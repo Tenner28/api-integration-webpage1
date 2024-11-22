@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Integration Webpage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        .output {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>API Integration Webpage</h1>
+    <p>This page demonstrates API calls to fetch IP, location, and weather data.</p>
+    <div id="output" class="output">Results will appear here...</div>
+
+    <script>
+        async function fetchAPIs() {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = 'Fetching data...';
+
+            try {
+                // 1. Get the public IP address
+                const ipResponse = await fetch('https://api.ipify.org?format=json');
+                const ipData = await ipResponse.json();
+                const userIP = ipData.ip;
+                outputDiv.innerHTML += `<p><strong>IP Address:</strong> ${userIP}</p>`;
+
+                // 2. Get location based on IP
+                const locationResponse = await fetch(`https://ipinfo.io/${userIP}/json?token=YOUR_IPINFO_API_TOKEN`);
+                const locationData = await locationResponse.json();
+                const userLocation = locationData.city + ', ' + locationData.region;
+                outputDiv.innerHTML += `<p><strong>Location:</strong> ${userLocation}</p>`;
+
+                // 3. Get weather using IP (fallback weather API)
+                const weatherResponseByIP = await fetch(
+                    `https://api.openweathermap.org/data/2.5/weather?q=${locationData.city}&appid=YOUR_OPENWEATHERMAP_API_KEY&units=metric`
+                );
+                const weatherDataByIP = await weatherResponseByIP.json();
+                outputDiv.innerHTML += `<p><strong>Weather using IP:</strong> ${weatherDataByIP.weather[0].description}, ${weatherDataByIP.main.temp}°C</p>`;
+
+                // 4. Get weather using location
+                const weatherResponseByLocation = await fetch(
+                    `https://api.openweathermap.org/data/2.5/weather?lat=${locationData.loc.split(',')[0]}&lon=${locationData.loc.split(',')[1]}&appid=YOUR_OPENWEATHERMAP_API_KEY&units=metric`
+                );
+                const weatherDataByLocation = await weatherResponseByLocation.json();
+                outputDiv.innerHTML += `<p><strong>Weather using Location:</strong> ${weatherDataByLocation.weather[0].description}, ${weatherDataByLocation.main.temp}°C</p>`;
+            } catch (error) {
+                outputDiv.innerHTML = `<p style="color: red;">Error fetching data: ${error.message}</p>`;
+            }
+        }
+
+        fetchAPIs();
+    </script>
+</body>
+</html>
