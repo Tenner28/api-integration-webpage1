@@ -43,7 +43,7 @@
 
                 // 3. Get weather using IP (fallback weather API)
                 const weatherResponseByIP = await fetch(
-                    `https://api.openweathermap.org/data/2.5/weather?q=BelmopanCity&appid=15a013549a955e5bf122bf5c7a0b5302&units=metric`
+                    `https://api.openweathermap.org/data/2.5/weather?q=Belmopan&appid=15a013549a955e5bf122bf5c7a0b5302&units=metric`
                 );
                 const weatherDataByIP = await weatherResponseByIP.json();
                 outputDiv.innerHTML += `<p><strong>Weather using IP:</strong> ${weatherDataByIP.weather[0].description}, ${weatherDataByIP.main.temp}°C</p>`;
